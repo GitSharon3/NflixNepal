@@ -27,7 +27,7 @@ function Footer2() {
           <div className={styles.security}>
             <div> Nepali</div>
           </div>
-            <span>© This page is protected by Google reCAPTCHA to ensure you're not a bot.</span>
+            <span>© This page is protected by Google reCAPTCHA to ensure you&apos;re not a bot.</span>
           
         </div>
       </footer>

@@ -49,7 +49,7 @@ function Search() {
     <div>
       {PopupMessage}
 
-      <div className="flex justify-center mt-20 mb-8">
+      <div className="flex justify-center mt-32 mb-8">
         <input
           onChange={Search}
           type="text"

@@ -21,26 +21,27 @@ function Welcome() {
       >
         <div className="w-full max-w-3xl text-center">
             <Fade duration={2000}>
-              <h1 className="mb-4 text-4xl font-bold leading-tight text-white sm:text-5xl md:text-6xl">
+              <h1 className="mb-4 text-6xl font-bold leading-tight text-white sm:text-7xl md:text-7xl">
                 Unlimited movies, TV shows and more.
               </h1>
-              <h1 className="mb-4 text-xl font-light text-stone-200 sm:text-2xl">
-                Watch anywhere. Cancel anytime.
+              <h1 className="mb-4 text-xl font-bold text-stone-200 sm:text-2xl">
+                Starts at USD 2.99. Cancel anytime.
               </h1>
-              <h1 className="mb-6 text-base font-light text-stone-200 sm:text-xl">
+              <h1 className="mb-6 text-base font-bold text-stone-200 sm:text-xl">
                 Ready to watch? Enter your email to create or restart your
                 membership.
               </h1>
               <div className="mx-auto flex w-full max-w-2xl flex-col gap-3 sm:flex-row">
                 <input
-                  placeholder="Email Address"
-                  className="min-h-12 flex-1 rounded-sm border border-neutral-500 bg-black/60 px-4 py-3 text-white outline-none placeholder:text-neutral-300 focus:border-white"
-                />
-                <Link to={"/signup"}>
-                  <button className="min-h-12 w-full rounded-sm bg-red-700 px-6 py-3 text-lg font-semibold text-white transition hover:bg-red-800 sm:w-auto">
-                    Get Started
-                  </button>
-                </Link>
+  placeholder="Email Address"
+  className="min-h-18 flex-1 rounded-sm border border-neutral-500 bg-black/60 px-4 py-3 text-white outline-none placeholder:text-neutral-300 focus:border-white"
+/>
+
+<Link to={"/signup"}>
+  <button className="min-h-18 w-full rounded-sm bg-red-700 px-8 py-4 text-xl font-semibold text-white transition hover:bg-red-800 sm:w-auto">
+    Get Started
+  </button>
+</Link>
               </div>
             </Fade>
         </div>

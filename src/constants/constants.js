@@ -1,7 +1,16 @@
 export const baseUrl = "https://api.themoviedb.org/3";
-export const API_KEY = "f3664a35e0f7944cfc0ba7807422261a";
+export const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
 export const imageUrl = "https://image.tmdb.org/t/p/original";
 export const imageUrl2 = "https://image.tmdb.org/t/p/w500";
+
+export const FIREBASE_API_KEY = import.meta.env.VITE_FIREBASE_API_KEY;
+export const FIREBASE_AUTH_DOMAIN = import.meta.env.VITE_FIREBASE_AUTH_DOMAIN;
+export const FIREBASE_PROJECT_ID = import.meta.env.VITE_FIREBASE_PROJECT_ID;
+export const FIREBASE_STORAGE_BUCKET = import.meta.env.VITE_FIREBASE_STORAGE_BUCKET;
+export const FIREBASE_MESSAGING_SENDER_ID = import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID;
+export const FIREBASE_APP_ID = import.meta.env.VITE_FIREBASE_APP_ID;
+export const FIREBASE_MEASUREMENT_ID = import.meta.env.VITE_FIREBASE_MEASUREMENT_ID;
+
 
 export const genresList = [
   {

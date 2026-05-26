@@ -1,11 +1,6 @@
 import React, { useState, useContext, useEffect, useRef } from "react";
 import { getAuth, updateProfile, signOut } from "firebase/auth";
-import {
-  ref,
-  uploadBytesResumable,
-  getDownloadURL,
-  getStorage,
-} from "firebase/storage";
+
 import { useNavigate } from "react-router-dom";
 import { Fade } from "../components/ui/Fade";
 import toast, { Toaster } from "react-hot-toast";
@@ -46,16 +41,7 @@ function Profile() {
     toast.success("  Data Updated Sucessfuly  ");
   }
 
-  const handleFileChange = (event) => {
-    const fileObj = event.target.files[0];
-    setNewProfielPic(fileObj);
-    setNewProfielPicURL(URL.createObjectURL(fileObj));
-    if (!fileObj) {
-      return;
-    }
-    console.log("fileObj is", fileObj);
-    event.target.value = null;
-  };
+
 
   const changeUserName = (e) => {
     e.preventDefault();
@@ -74,39 +60,6 @@ function Profile() {
       }
     }
 
-    if (newProfielPic != "") {
-      const storage = getStorage();
-      const storageRef = ref(storage, `/ProfilePics/${User.uid}`);
-      const uploadTask = uploadBytesResumable(storageRef, newProfielPic);
-
-      uploadTask.on(
-        "state_changed",
-        (snapshot) => {
-          const prog = Math.round(
-            (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-          );
-        },
-        (error) => {
-          alert(error.message);
-          alert(error.code);
-        },
-        () => {
-          getDownloadURL(uploadTask.snapshot.ref).then((url) => {
-            console.log(url, "This is the new Url for Profile Pic");
-            setProfilePic(url);
-            const auth = getAuth();
-            updateProfile(auth.currentUser, { photoURL: url })
-              .then(() => {
-                notify();
-                setisMyListUpdated(true);
-              })
-              .catch((error) => {
-                alert(error.message);
-              });
-          });
-        }
-      );
-    }
   };
 
   const updateProfilePic = (imageURL) => {
@@ -232,34 +185,11 @@ function Profile() {
                     className="w-16 h-16 rounded-md cursor-pointer"
                     src="https://ih0.redbubble.net/image.618363037.0853/flat,1000x1000,075,f.u2.jpg"
                   />
-                  <input
-                    style={{ display: "none" }}
-                    ref={inputRef}
-                    type="file"
-                    onChange={handleFileChange}
-                  />
-                  <svg
-                    onClick={handleClick}
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-12 w-12 text-stone-600 cursor-pointer"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    strokeWidth={2}
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
-                    />
-                  </svg>
-                </div>
-                {newProfielPicURL ? (
-                  <img className="h-30 w-72" src={newProfielPicURL} />
-                ) : null}
+
               </div>
             </div>
-            <div className="flex justify-between mt-4">
+          </div>
+          <div className="flex justify-between mt-4">
               <button
                 onClick={SignOut}
                 className="flex items-center border-[0.7px] border-white text-white font-medium sm:font-bold text-xs px-14 md:px-24 md:text-xl  py-3 rounded shadow hover:shadow-lg hover:bg-white hover:border-white hover:text-red-700 outline-none focus:outline-none mr-3 mb-1 ease-linear transition-all duration-150"
@@ -280,7 +210,7 @@ function Profile() {
                 </svg>
                 SignOut
               </button>
-              {userName != "" || newProfielPic != "" ? (
+              {userName != "" ? (
                 <button
                   onClick={changeUserName}
                   className="flex items-center bg-red-700 text-white font-medium sm:font-bold text-xs px-10 md:px-16 md:text-xl  py-3 rounded shadow hover:shadow-lg hover:bg-white hover:text-red-700 outline-none focus:outline-none mr-3 mb-1 ease-linear transition-all duration-150"
