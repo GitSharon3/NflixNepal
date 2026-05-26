@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { NavLink, Link } from "react-router-dom";
 import { AuthContext } from "../../../context/userContext";
-import logo from "../../../assets/images/logo.png";
+import logo from "../../../assets/images/logoo.png";
 
 const links = [
   { to: "/home", label: "Home" },

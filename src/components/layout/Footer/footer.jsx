@@ -1,9 +1,38 @@
-function Footer() {
+import React from "react";
+import styles from "./styles.module.scss";
+
+function Footer2() {
   return (
-    <footer className="bg-neutral-950 border-t border-neutral-800 px-6 py-8 text-center text-sm text-neutral-400">
-      <p>Not Real Netflix. Built for learning and demo purposes.</p>
-    </footer>
+    <div className="bg-black p-2">
+      <footer className={styles.footer}>
+        <div className={styles.containerFooter}>
+          <div className={styles.icons}></div>
+          <ul className={styles.details}>
+            <li>FAQ</li>
+            <li>Investor Relations</li>
+            <li>Privacy</li>
+            <li>Speed Test</li>
+            <li>Help Center</li>
+            <li>Jobs</li>
+            <li>Cookie Preference</li>
+            <li>Legal Notices</li>
+            <li>Account</li>
+            <li>Ways to Watch</li>
+            <li>Corporate Information</li>
+            <li>Only on Netflix</li>
+            <li>Media Center</li>
+            <li>Terms of Use</li>
+            <li>Contact Us</li>
+          </ul>
+          <div className={styles.security}>
+            <div> Nepali</div>
+          </div>
+            <span>© This page is protected by Google reCAPTCHA to ensure you're not a bot.</span>
+          
+        </div>
+      </footer>
+    </div>
   );
 }
 
-export default Footer;
+export default Footer2;
