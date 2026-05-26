@@ -1,7 +1,6 @@
-import React from "react";
 import { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Fade } from "react-reveal";
+import { Fade } from "../components/ui/Fade";
 import { ClipLoader } from "react-spinners";
 import {
   getAuth,
@@ -10,14 +9,14 @@ import {
   signInWithPopup,
 } from "firebase/auth";
 import { setDoc, doc, getDoc } from "firebase/firestore";
-import { db } from "../Firebase/FirebaseConfig";
-import { AuthContext } from "../Context/UserContext";
+import { db } from "../firebase/config";
+import { AuthContext } from "../context/userContext";
 
-import GoogleLogo from "../images/GoogleLogo.png";
-import WelcomePageBanner from "../images/WelcomePageBanner.jpg";
+import GoogleLogo from "../assets/images/logo.png";
+import WelcomePageBanner from "../assets/images/WelcomePageBanner.jpg";
 
 function SignIn() {
-  const { User, setUser } = useContext(AuthContext);
+  useContext(AuthContext);
   const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
@@ -117,12 +116,12 @@ function SignIn() {
 
   return (
     <section
-      className="h-[100vh] bg-gray-50 dark:bg-gray-900"
+      className="min-h-screen bg-gray-50 bg-cover bg-center pt-20 dark:bg-gray-900"
       style={{
-        background: `linear-gradient(0deg, hsl(0deg 0% 0% / 73%) 0%, hsl(0deg 0% 0% / 73%) 35%),url(${WelcomePageBanner})`,
+        backgroundImage: `linear-gradient(0deg, hsl(0deg 0% 0% / 73%) 0%, hsl(0deg 0% 0% / 73%) 35%), url(${WelcomePageBanner})`,
       }}
     >
-      <div className="h-[100vh] flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+      <div className="flex min-h-[calc(100vh-5rem)] flex-col items-center justify-center px-6 py-8 mx-auto lg:py-0">
         <div className="w-full bg-[#000000a2] rounded-lg shadow sm:my-0 md:mt-0 sm:max-w-lg xl:p-0 border-2 border-stone-800 lg:border-0">
           <Fade>
             <div>
@@ -140,7 +139,7 @@ function SignIn() {
                 >
                   <div>
                     <label
-                      for="email"
+                      htmlFor="email"
                       className="block mb-2 text-sm font-medium text-white dark:text-white"
                     >
                       Your email
@@ -161,7 +160,7 @@ function SignIn() {
                   </div>
                   <div>
                     <label
-                      for="password"
+                      htmlFor="password"
                       className="block mb-2 text-sm font-medium text-white dark:text-white"
                     >
                       Password
@@ -214,7 +213,7 @@ function SignIn() {
                       </div>
                       <div className="ml-3 text-sm">
                         <label
-                          for="remember"
+                          htmlFor="remember"
                           className="text-gray-500 dark:text-gray-300"
                         >
                           Remember me

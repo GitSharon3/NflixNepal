@@ -1,58 +1,48 @@
-import React from "react";
-import { useEffect } from "react";
+import Footer from "../components/layout/Footer/footer";
 
-import Footer from "../componets/Footer/Footer";
+import WelcomePageImage1 from "../assets/images/WelcomePageImage1.png";
+import WelcomePageImage2 from "../assets/images/WelcomePageImage2.png";
+import WelcomePageImage3 from "../assets/images/WelcomePageImage3.png";
+import WelcomePageImage4 from "../assets/images/WelcomePageImage4.png";
+import WelcomePageBanner from "../assets/images/WelcomePageBanner.jpg";
 
-import WelcomePageImage1 from "../images/WelcomePageImage1.png";
-import WelcomePageImage2 from "../images/WelcomePageImage2.png";
-import WelcomePageImage3 from "../images/WelcomePageImage3.png";
-import WelcomePageImage4 from "../images/WelcomePageImage4.png";
-import WelcomePageBanner from "../images/WelcomePageBanner.jpg";
-
-import { Fade } from "react-reveal";
+import { Fade } from "../components/ui/Fade";
 import { Link } from "react-router-dom";
 
 function Welcome() {
-  useEffect(() => {
-    //alert("This is NOT REAL NETFLIX so don't Enter your REAL CREDENTIALS")
-    const image1 = WelcomePageImage1;
-  }, []);
-
   return (
-    <div>
+    <div className="bg-black text-white">
       {/*Hero Section*/}
       <div
         style={{
-          background: `linear-gradient(0deg, hsl(0deg 0% 0% / 73%) 0%, hsl(0deg 0% 0% / 73%) 35%),url(${WelcomePageBanner})`,
+          backgroundImage: `linear-gradient(0deg, hsl(0deg 0% 0% / 76%) 0%, hsl(0deg 0% 0% / 76%) 35%), url(${WelcomePageBanner})`,
         }}
-        className="h-[32rem] w-full sm:h-[65vh] xl:h-[80vh] bg-slate-800 relative"
+        className="relative flex min-h-[34rem] w-full items-center justify-center bg-cover bg-center px-4 pt-20 sm:min-h-[42rem] xl:min-h-[46rem]"
       >
-        <div className="grid content-center justify-center h-full justify-items-center">
-          <div className="w-10/12 text-center sm:w-11/12 md:w-40rem">
+        <div className="w-full max-w-3xl text-center">
             <Fade duration={2000}>
-              <h1 className="mb-3 text-3xl font-semibold text-center text-white sm:text-4xl md:text-6xl">
+              <h1 className="mb-4 text-4xl font-bold leading-tight text-white sm:text-5xl md:text-6xl">
                 Unlimited movies, TV shows and more.
               </h1>
-              <h1 className="mb-4 text-xl text-center text-stone-400 font-light sm:text-2xl">
-                Watch anywahere.Cancel anytime
+              <h1 className="mb-4 text-xl font-light text-stone-200 sm:text-2xl">
+                Watch anywhere. Cancel anytime.
               </h1>
-              <h1 className="mb-2 text-center text-stone-400 font-light sm:text-xl sm:mb-8">
+              <h1 className="mb-6 text-base font-light text-stone-200 sm:text-xl">
                 Ready to watch? Enter your email to create or restart your
                 membership.
               </h1>
-              <div>
+              <div className="mx-auto flex w-full max-w-2xl flex-col gap-3 sm:flex-row">
                 <input
                   placeholder="Email Address"
-                  className="w-full p-2 py-3 rounded-sm sm:py-4 md:py-5 md:w-3/4"
+                  className="min-h-12 flex-1 rounded-sm border border-neutral-500 bg-black/60 px-4 py-3 text-white outline-none placeholder:text-neutral-300 focus:border-white"
                 />
                 <Link to={"/signup"}>
-                  <button className="px-4 py-2 mt-3 font-medium text-white bg-red-700 rounded-sm sm:py-4 md:mt-0 md:pb-5 md:text-xl md:w-1/4">
+                  <button className="min-h-12 w-full rounded-sm bg-red-700 px-6 py-3 text-lg font-semibold text-white transition hover:bg-red-800 sm:w-auto">
                     Get Started
                   </button>
                 </Link>
               </div>
             </Fade>
-          </div>
         </div>
         <div
           style={{
@@ -63,7 +53,7 @@ function Welcome() {
       </div>
 
       {/* Section 2 */}
-      <section className="bg-black border-y-8 border-y-zinc-800">
+      <section className="border-y-8 border-y-zinc-800 bg-black">
         <Fade>
           <div className="flex justify-center md:py-8">
             <div className="lg:flex lg:items-center lg:w-9/12">

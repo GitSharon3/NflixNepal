@@ -1,6 +1,5 @@
 import React, { useState, useContext, useEffect, useRef } from "react";
 import { getAuth, updateProfile, signOut } from "firebase/auth";
-import { db } from "../Firebase/FirebaseConfig";
 import {
   ref,
   uploadBytesResumable,
@@ -8,11 +7,11 @@ import {
   getStorage,
 } from "firebase/storage";
 import { useNavigate } from "react-router-dom";
-import { Fade } from "react-reveal";
+import { Fade } from "../components/ui/Fade";
 import toast, { Toaster } from "react-hot-toast";
 
-import { AuthContext } from "../Context/UserContext";
-import WelcomePageBanner from "../images/WelcomePageBanner.jpg";
+import { AuthContext } from "../context/userContext";
+import WelcomePageBanner from "../assets/images/WelcomePageBanner.jpg";
 
 import "swiper/css";
 import "swiper/css/navigation";

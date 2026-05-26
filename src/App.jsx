@@ -1,40 +1,40 @@
 import { useEffect, useContext, lazy, Suspense } from "react";
 import "./App.css";
 
-const Home = lazy(() => import("./Pages/Home"));
-const Series = lazy(() => import("./Pages/Series"));
-const Search = lazy(() => import("./Pages/Search"));
-const Profile = lazy(() => import("./Pages/Profile"));
-const MyList = lazy(() => import("./Pages/MyList"));
-const SignIn = lazy(() => import("./Pages/SignIn"));
-const SignUp = lazy(() => import("./Pages/SignUp"));
-const Welcome = lazy(() => import("./Pages/Welcome"));
-const ErrorPage = lazy(() => import("./Pages/ErrorPage"));
-const Play = lazy(() => import("./Pages/Play"));
-const LikedMovies = lazy(() => import("./Pages/LikedMovies"));
-const History = lazy(() => import("./Pages/History"));
+const Home = lazy(() => import("./pages/Home"));
+const Series = lazy(() => import("./pages/Series"));
+const Search = lazy(() => import("./pages/Search"));
+const Profile = lazy(() => import("./pages/Profile"));
+const MyList = lazy(() => import("./pages/MyList"));
+const SignIn = lazy(() => import("./pages/SignIn"));
+const SignUp = lazy(() => import("./pages/SignUp"));
+const Welcome = lazy(() => import("./pages/Welcome"));
+const ErrorPage = lazy(() => import("./pages/ErrorPage"));
+const Play = lazy(() => import("./pages/Play"));
+const LikedMovies = lazy(() => import("./pages/LikedMovies"));
+const History = lazy(() => import("./pages/History"));
 
-import { Routes, Route, Navigate } from "react-router-dom";
-import { AuthContext } from "./Context/UserContext";
+import { Routes, Route } from "react-router-dom";
+import { AuthContext } from "./context/userContext";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import Loading from "./componets/Loading/Loading";
-import Navbar from "./componets/Header/Navbar";
-import NavbarWithoutUser from "./componets/Header/NavbarWithoutUser";
+import Loading from "./components/ui/loading";
+import Navbar from "./components/layout/Header/navbar";
+import NavbarWithoutUser from "./components/layout/Header/navbarWithoutUser";
 
 function App() {
   const { User, setUser } = useContext(AuthContext);
   useEffect(() => {
     const auth = getAuth();
-    onAuthStateChanged(auth, (user) => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
       setUser(user);
-      console.log(user);
     });
-  }, []);
+    return unsubscribe;
+  }, [setUser]);
 
   return (
     <div>
-      {User ? <Navbar/> : <NavbarWithoutUser/>}
-      <Suspense replace fallback={<Loading />}>
+      {User ? <Navbar /> : <NavbarWithoutUser />}
+      <Suspense fallback={<Loading />}>
         <Routes>
           <Route index path="/" element={User ? <Home /> : <Welcome />} />
           {User ? (
