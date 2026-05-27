@@ -10,9 +10,20 @@
 
 ---
 
+## 🌐 Live Demo & Hosting
+
+NflixNepal is deployed and hosted with **Firebase Hosting**.
+
+🔗 **Live Demo:** [https://nflixnepal-fa378.web.app](https://nflixnepal-fa378.web.app)
+
+The production build is generated with Vite and served from the `dist/` directory through Firebase Hosting. The Firebase project configured for this deployment is **`nflixnepal-fa378`**, with SPA rewrites enabled so routes like `/signin`, `/home`, `/search`, and `/profile` work correctly after refresh.
+
+---
+
 ## 🌟 Key Application Features
 
 - 🔐 **Firebase Authentication:** Secure user registration, sign-in, and persistent session state.
+- 🚀 **Firebase Hosting Deployment:** Public live demo hosted at [nflixnepal-fa378.web.app](https://nflixnepal-fa378.web.app).
 - 🍿 **Cinematic Showcase Banner:** Captivating hero header featuring trending movies with smooth auto-playing video trailers/teasers.
 - 🎭 **Curated Rows by Genre:** Browse fluid, touch-friendly rows of Action, Comedy, Horror, Romance, Documentaries, and regional recommendations.
 - 🔍 **Real-time Live Search:** Fast and responsive movie/series discovery.
@@ -92,7 +103,7 @@ Below is an exhaustive breakdown of the architectural packages and tools used to
 * **[React Router DOM (v7.15.1)](https://reactrouter.com/):** Handles client-side navigation and routing throughout pages (SignIn, SignUp, Profile, Home, Search, Play, Error, etc.).
 
 ### 🗄️ Backend, Database, & API Client
-* **[Firebase (v12.13.0)](https://firebase.google.com/):** Powers database syncing (for watchlists, likes, and watch history) and user state management (Authentication & Firestore integration).
+* **[Firebase (v12.13.0)](https://firebase.google.com/):** Powers Authentication, Firestore-backed user data, and Firebase Hosting for the live production demo.
 * **[Axios (v1.6.0)](https://axios-http.com/):** A promise-based HTTP client used to seamlessly request and fetch media details from TMDB (The Movie Database) endpoints.
 
 ### 🎨 Styling & Component Libraries
@@ -112,6 +123,8 @@ Below is an exhaustive breakdown of the architectural packages and tools used to
 ## 📁 System Configuration Files Explained
 
 * **`vite.config.js`:** The configuration script for Vite. Registers the official React plugin (`@vitejs/plugin-react`) to compile JSX elements using speedy Babel transforms.
+* **`firebase.json`:** Firebase Hosting configuration. Serves the production `dist/` folder and rewrites all routes to `index.html` for React Router support.
+* **`.firebaserc`:** Links the local project to the Firebase project ID `nflixnepal-fa378`.
 * **`tailwind.config.cjs` & `postcss.config.cjs`:** Define customized layouts, breakpoints, custom color utilities, and configure tailwind to purge unused CSS on production builds.
 * **`eslint.config.js`:** Custom rules enforcing high standards of React architecture, and ensuring React Refresh modules run correctly.
 * **`.gitignore`:** Formatted to strictly prevent node packages (`node_modules`), build logs, specific IDE files, compile results (`dist`), and local secrets (`.env`) from leaking into public Git commits.
@@ -171,6 +184,25 @@ Run these in your command terminal:
 * `npm run lint` - Runs high-standard static analysis checks across the codebase.
 * `npm run build` - Builds and tree-shakes production bundle code inside `dist/`.
 * `npm run preview` - Runs a local preview of the production `dist/` builds.
+* `npm run deploy` - Builds the app and deploys the latest `dist/` output to Firebase Hosting.
+
+---
+
+## 🚀 Firebase Deployment
+
+This project is hosted on Firebase Hosting at:
+
+```text
+https://nflixnepal-fa378.web.app
+```
+
+To publish a fresh production build, make sure you are logged in to Firebase CLI and run:
+
+```bash
+npm run deploy
+```
+
+Firebase will build the Vite app, upload the `dist/` folder, and serve the latest version from the live demo URL.
 
 ---
 
