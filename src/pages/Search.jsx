@@ -4,7 +4,6 @@ import { API_KEY, imageUrl2 } from "../constants/constants";
 import { PopUpContext } from "../context/moviePopUpContext";
 import useUpdateMylist from "../hooks/useUpdateList";
 import axios from "../axios";
-import MoviePopUp from "../components/ui/moviePopUp";
 import usePlayMovie from "../hooks/usePlay";
 import useUpdateLikedMovies from "../hooks/useUpdateLikedMovies";
 import useGenereConverter from "../hooks/useGenreConverter";
@@ -12,7 +11,8 @@ import StarRatings from "react-star-ratings";
 
 // Search page queries TMDb and renders interactive result cards.
 function Search() {
-  const { showModal, setShowModal } = useContext(PopUpContext);
+  const { setShowModal, setPopupMovie, setPopupFrom, setPopupVideo } =
+    useContext(PopUpContext);
   const { addToMyList, PopupMessage } = useUpdateMylist();
   const { playMovie } = usePlayMovie();
   const { addToLikedMovies } = useUpdateLikedMovies();
@@ -20,7 +20,6 @@ function Search() {
 
   const [searchQuery, setSearchQuery] = useState("");
   const [movies, setMovies] = useState([]);
-  const [moviePopupInfo, setMoviePopupInfo] = useState({});
 
   // Keep the search results synchronized with the latest user-entered query.
   const Search = (e) => {
@@ -46,7 +45,9 @@ function Search() {
 
   // Store selected movie details before opening the shared popup modal.
   const handleMoviePopup = (movieInfo) => {
-    setMoviePopupInfo(movieInfo);
+    setPopupMovie(movieInfo);
+    setPopupFrom("");
+    setPopupVideo(null);
     setShowModal(true);
   };
 
@@ -228,8 +229,6 @@ function Search() {
           </>
         )}
       </div>
-
-      {showModal ? <MoviePopUp data1={moviePopupInfo} /> : null}
     </div>
   );
 }

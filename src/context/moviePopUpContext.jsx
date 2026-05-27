@@ -7,9 +7,23 @@ export const PopUpContext = createContext(null);
 export default function MoviePopUpProvider({ children }) {
   // Keep modal visibility global so any movie card can open the shared popup.
   const [showModal, setShowModal] = useState(false);
+  const [popupMovie, setPopupMovie] = useState(null);
+  const [popupFrom, setPopupFrom] = useState("");
+  const [popupVideo, setPopupVideo] = useState(null);
 
   return (
-    <PopUpContext.Provider value={{ showModal, setShowModal }}>
+    <PopUpContext.Provider
+      value={{
+        showModal,
+        setShowModal,
+        popupMovie,
+        setPopupMovie,
+        popupFrom,
+        setPopupFrom,
+        popupVideo,
+        setPopupVideo,
+      }}
+    >
       {children}
     </PopUpContext.Provider>
   );

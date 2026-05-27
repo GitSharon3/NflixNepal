@@ -4,17 +4,19 @@ import axios from "../../axios";
 import { PopUpContext } from "../../context/moviePopUpContext";
 import { Fade } from "./Fade";
 import StarRatings from "react-star-ratings";
-import MoviePopUp from "./moviePopUp";
 import usePlayMovie from "../../hooks/usePlay";
 
 // Banner displays a random featured title from the supplied TMDb category URL.
 function Banner(props) {
-  const { showModal, setShowModal } = useContext(PopUpContext);
+  const {
+    setShowModal,
+    setPopupMovie,
+    setPopupFrom,
+    setPopupVideo,
+  } = useContext(PopUpContext);
   const { playMovie } = usePlayMovie();
 
   const [movie, setMovie] = useState([]);
-  const [moviePopupInfo, setMoviePopupInfo] = useState({});
-  const [urlId, setUrlId] = useState("");
 
   // Track viewport width for responsive banner behavior.
   function getWindowSize() {
@@ -49,7 +51,9 @@ function Banner(props) {
 
   // Open the modal and fetch the first related video for richer details.
   const handleMoviePopup = (movieInfo) => {
-    setMoviePopupInfo(movieInfo);
+    setPopupMovie(movieInfo);
+    setPopupFrom("");
+    setPopupVideo(null);
     setShowModal(true);
 
     axios
@@ -57,7 +61,7 @@ function Banner(props) {
       .then((responce) => {
         console.log(responce.data);
         if (responce.data.results.length !== 0) {
-          setUrlId(responce.data.results[0]);
+          setPopupVideo(responce.data.results[0]);
         } else {
           console.log("Array Emptey");
         }
@@ -240,7 +244,6 @@ function Banner(props) {
         ></div>
       </div>
 
-      {showModal ? <MoviePopUp data1={moviePopupInfo} data2={urlId} /> : null}
     </>
   );
 }

@@ -1,11 +1,14 @@
+/* Tailwind layers provide the global reset, component utilities, and atomic classes. */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* Keep the document background black during route transitions and lazy loading. */
 html {
   background: #050505;
 }
 
+/* Define the base Netflix-style dark canvas and system font stack. */
 body {
   margin: 0;
   background: #050505;
@@ -16,6 +19,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Prevent external poster and backdrop images from overflowing their containers. */
 img {
   max-width: 100%;
 }

@@ -1,7 +1,6 @@
 import React from "react";
 import { useEffect, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import MoviePopUp from "../ui/moviePopUp";
 import { imageUrl2 } from "../../constants/constants";
 import useUpdateMylist from "../../hooks/useUpdateList";
 import usePlayMovie from "../../hooks/usePlay";
@@ -12,14 +11,14 @@ import { db } from "../../firebase/config";
 import { doc, getDoc } from "firebase/firestore";
 import { AuthContext } from "../../context/userContext";
 import { PopUpContext } from "../../context/moviePopUpContext";
-import axios from "../../axios";
 import StarRatings from "react-star-ratings";
 import { ClipLoader } from "react-spinners";
 
 // Reusable collection page for My List, watched movies, and liked movies.
 function UserMovieSection(props) {
   const { User } = useContext(AuthContext);
-  const { showModal, setShowModal } = useContext(PopUpContext);
+  const { setShowModal, setPopupMovie, setPopupFrom, setPopupVideo } =
+    useContext(PopUpContext);
 
   const { addToMyList, removeFromMyList, PopupMessage } = useUpdateMylist();
   const { removeFromWatchedMovies, removePopupMessage } =
@@ -30,7 +29,6 @@ function UserMovieSection(props) {
   const { convertGenere } = useGenereConverter();
 
   const [myMovies, setMyMovies] = useState([]);
-  const [moviePopupInfo, setMoviePopupInfo] = useState({});
   const [title, setTitle] = useState("");
   const [isResultEmpty, setIsResultEmpty] = useState(false);
 
@@ -73,7 +71,9 @@ function UserMovieSection(props) {
 
   // Cache selected movie details before opening the shared details modal.
   const handleMoviePopup = (movieInfo) => {
-    setMoviePopupInfo(movieInfo);
+    setPopupMovie(movieInfo);
+    setPopupFrom(props.from);
+    setPopupVideo(null);
     setShowModal(true);
   };
 
@@ -317,9 +317,6 @@ function UserMovieSection(props) {
           </>
         )}
       </div>
-      {showModal ? (
-        <MoviePopUp data1={moviePopupInfo} from={props.from} />
-      ) : null}
     </div>
   );
 }

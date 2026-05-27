@@ -1,6 +1,5 @@
 // Main application component containing routing, lazy-loaded pages, and global authentication state listener
 import { useEffect, useContext, lazy, Suspense } from "react";
-import "./App.css";
 
 // Lazy-loaded page components for optimized bundle size and faster initial load
 const Home = lazy(() => import("./pages/Home"));
@@ -22,9 +21,13 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 import Loading from "./components/ui/loading";
 import Navbar from "./components/layout/Header/navbar";
 import NavbarWithoutUser from "./components/layout/Header/navbarWithoutUser";
+import MoviePopUp from "./components/ui/moviePopUp";
+import { PopUpContext } from "./context/moviePopUpContext";
 
 function App() {
   const { User, setUser } = useContext(AuthContext);
+  const { showModal, popupMovie, popupFrom, popupVideo } =
+    useContext(PopUpContext);
 
   // Synchronize global authentication state with Firebase Auth.
   useEffect(() => {
@@ -63,6 +66,9 @@ function App() {
           <Route path="*" element={<ErrorPage />} />
         </Routes>
       </Suspense>
+      {showModal && popupMovie ? (
+        <MoviePopUp data1={popupMovie} data2={popupVideo} from={popupFrom} />
+      ) : null}
     </div>
   );
 }

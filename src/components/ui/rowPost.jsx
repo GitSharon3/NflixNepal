@@ -6,16 +6,15 @@ import { PopUpContext } from "../../context/moviePopUpContext";
 import usePlayMovie from "../../hooks/usePlay";
 import useUpdateLikedMovies from "../../hooks/useUpdateLikedMovies";
 import useUpdateMylist from "../../hooks/useUpdateList";
-import MoviePopUp from "./moviePopUp";
 
 // RowPost renders a horizontal movie shelf from either fetched or provided data.
 function RowPost({ title, url, movieData, islarge = false, first = false }) {
-  const { showModal, setShowModal } = useContext(PopUpContext);
+  const { setShowModal, setPopupMovie, setPopupFrom, setPopupVideo } =
+    useContext(PopUpContext);
   const { playMovie } = usePlayMovie();
   const { addToMyList } = useUpdateMylist();
   const { addToLikedMovies } = useUpdateLikedMovies();
   const [movies, setMovies] = useState(movieData || []);
-  const [moviePopupInfo, setMoviePopupInfo] = useState({});
 
   useEffect(() => {
     // Prefer caller-provided movies for personalized rows.
@@ -33,7 +32,9 @@ function RowPost({ title, url, movieData, islarge = false, first = false }) {
 
   // Share selected movie details with the global modal.
   const handleMoviePopup = (movie) => {
-    setMoviePopupInfo(movie);
+    setPopupMovie(movie);
+    setPopupFrom("");
+    setPopupVideo(null);
     setShowModal(true);
   };
 
@@ -108,7 +109,6 @@ function RowPost({ title, url, movieData, islarge = false, first = false }) {
           );
         })}
       </div>
-      {showModal ? <MoviePopUp data1={moviePopupInfo} /> : null}
     </section>
   );
 }

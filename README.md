@@ -23,6 +23,65 @@
 
 ---
 
+# 📸 Application Screenshots
+
+---
+
+## 🌍 Welcome Experience
+
+### Welcome Page
+![Welcome Page](src/assets/screenshots/welcome_page.png)
+
+### Welcome Page Section 2
+![Welcome Page 2](src/assets/screenshots/welcome_page2.png)
+
+### Welcome Page Section 3
+![Welcome Page 3](src/assets/screenshots/welcome_page3.png)
+
+---
+
+## 🔐 Authentication & User Profile
+
+### Sign In Page
+![Sign In Page](src/assets/screenshots/signIn.png)
+
+### Profile Page
+![Profile Page](src/assets/screenshots/ProfilePage.png)
+
+---
+
+## 🎬 Browse & Streaming Experience
+
+### Home Page
+![Home Page](src/assets/screenshots/homePage.png)
+
+### Series Page
+![Series Page](src/assets/screenshots/seriesPage.png)
+
+### Search Page
+![Search Page](src/assets/screenshots/searchPage.png)
+
+### Movie Popup
+![Movie Popup](src/assets/screenshots/MoviePopUp.png)
+
+### Movie Player
+![Movie Player](src/assets/screenshots/MoviePlay.png)
+
+---
+
+## ❤️ Personalized User Libraries
+
+### My List Page
+![My List Page](src/assets/screenshots/MyListpage.png)
+
+### Liked Movies Page
+![Liked Movies Page](src/assets/screenshots/LikedMoviesPage.png)
+
+### History Page
+![History Page](src/assets/screenshots/HistoryPage.png)
+
+---
+
 ## 🛠️ Complete Tools & Dependencies Breakdown
 
 Below is an exhaustive breakdown of the architectural packages and tools used to power NflixNepal, as defined in our configuration:
