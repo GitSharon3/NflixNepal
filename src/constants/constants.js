@@ -1,8 +1,10 @@
+// Global constants for API URLs, environment keys, and genre mappings.
 export const baseUrl = "https://api.themoviedb.org/3";
 export const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
 export const imageUrl = "https://image.tmdb.org/t/p/original";
 export const imageUrl2 = "https://image.tmdb.org/t/p/w500";
 
+// Firebase integration values are provided by the Vite environment.
 export const FIREBASE_API_KEY = import.meta.env.VITE_FIREBASE_API_KEY;
 export const FIREBASE_AUTH_DOMAIN = import.meta.env.VITE_FIREBASE_AUTH_DOMAIN;
 export const FIREBASE_PROJECT_ID = import.meta.env.VITE_FIREBASE_PROJECT_ID;
@@ -12,6 +14,7 @@ export const FIREBASE_APP_ID = import.meta.env.VITE_FIREBASE_APP_ID;
 export const FIREBASE_MEASUREMENT_ID = import.meta.env.VITE_FIREBASE_MEASUREMENT_ID;
 
 
+// Local lookup table used to translate TMDb genre IDs in movie responses.
 export const genresList = [
   {
     id: 28,

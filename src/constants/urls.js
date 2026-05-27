@@ -1,3 +1,4 @@
+// TMDb endpoint paths mapped by category for reusable movie queries.
 import { API_KEY } from "./constants";
 export const TopRated = `/movie/top_rated?api_key=${API_KEY}&language=en-US`;
 export const originals = `discover/tv?api_key=${API_KEY}&with_networks=213&sort_by=popularity.desc&language=en-US`;

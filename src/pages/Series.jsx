@@ -14,7 +14,9 @@ import {
   UpcomingMovies,
 } from "../constants/urls";
 
+// Series page reuses the home feed layout with TV-first category ordering.
 function Series() {
+  // Render TMDb rows for series and adjacent genre collections.
   return (
     <div>
       <Banner url={trendingSeries}></Banner>

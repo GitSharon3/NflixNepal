@@ -4,6 +4,7 @@ import react from 'eslint-plugin-react'
 import reactHooks from 'eslint-plugin-react-hooks'
 import reactRefresh from 'eslint-plugin-react-refresh'
 
+// ESLint flat config for React, hooks, and Vite refresh rules.
 export default [
   { ignores: ['dist'] },
   js.configs.recommended,

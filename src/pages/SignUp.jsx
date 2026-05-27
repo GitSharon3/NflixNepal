@@ -13,6 +13,7 @@ import { AuthContext } from "../context/userContext";
 import { ClipLoader } from "react-spinners";
 import WelcomePageBanner from "../assets/images/WelcomePageBanner.jpg";
 
+// Sign-up page creates Firebase users and prepares their Firestore profile data.
 function SignUp() {
   useContext(AuthContext);
 
@@ -23,6 +24,7 @@ function SignUp() {
 
   const navigate = useNavigate();
 
+  // Create the account and initialize empty per-user movie collections.
   const handleSubmit = (e) => {
     e.preventDefault();
     setLoader(true);
@@ -30,7 +32,6 @@ function SignUp() {
     const auth = getAuth();
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        // Signed in
         onAuthStateChanged(auth, (user) => {
           const EmptyArray = [];
           setDoc(doc(db, "Users", user.uid), {
@@ -77,6 +78,7 @@ function SignUp() {
       });
   };
 
+  // The form surfaces Firebase validation errors inline without leaving the page.
   return (
     <section
       className="min-h-screen bg-gray-500 bg-cover bg-center pt-20"

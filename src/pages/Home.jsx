@@ -19,12 +19,15 @@ import { doc, getDoc } from "firebase/firestore";
 import { db } from "../firebase/config";
 import { AuthContext } from "../context/userContext";
 
+// Home page composes the main discovery feed for signed-in users.
 function Home() {
   const { User } = useContext(AuthContext);
   const [watchedMovies, setWatchedMovies] = useState([]);
 
   useEffect(() => {
     if (!User?.uid) return;
+
+    // Hydrate the personalized watched row from the user's Firestore document.
     getDoc(doc(db, "WatchedMovies", User.uid)).then((result) => {
       if (result.exists()) {
         const mv = result.data();
@@ -33,6 +36,7 @@ function Home() {
     });
   }, [User]);
 
+  // Render curated TMDb rows with the personalized watched row only when data exists.
   return (
     <div>
       <Banner url={trending}></Banner>

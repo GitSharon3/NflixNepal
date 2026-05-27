@@ -15,6 +15,7 @@ import { AuthContext } from "../context/userContext";
 import GoogleLogo from "../assets/images/logo.png";
 import WelcomePageBanner from "../assets/images/WelcomePageBanner.jpg";
 
+// Sign-in page handles Firebase email and Google authentication flows.
 function SignIn() {
   useContext(AuthContext);
   const navigate = useNavigate();
@@ -24,6 +25,7 @@ function SignIn() {
   const [ErrorMessage, setErrorMessage] = useState("");
   const [loader, setLoader] = useState(false);
 
+  // Authenticate with email/password and return successful sessions to the app.
   const handleSubmit = (e) => {
     e.preventDefault();
     setLoader(true);
@@ -31,7 +33,6 @@ function SignIn() {
     const auth = getAuth();
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        // Signed in
         const user = userCredential.user;
         console.log(user);
         if (user != null) {
@@ -48,6 +49,7 @@ function SignIn() {
       });
   };
 
+  // Google sign-in also ensures each user has the expected Firestore list documents.
   const loginWithGoogle = (e) => {
     e.preventDefault();
     const auth = getAuth();
@@ -69,9 +71,8 @@ function SignIn() {
         ).then(() => {
           getDoc(doc(db, "MyList", user.uid)).then((result) => {
             if (result.exists()) {
-              // Data exist in MyList section for this user
+              // Existing users already have collection documents.
             } else {
-              // Creating a new MyList, WatchedMovies List, LikedMovies List for the user in the database
               setDoc(
                 doc(db, "MyList", user.uid),
                 {
@@ -107,13 +108,12 @@ function SignIn() {
         const errorMessage = error.message;
         setErrorMessage(error.message);
         setLoader(false);
-        // The email of the user's account used.
         const email = error.customData.email;
-        // The AuthCredential type that was used.
         const credential = GoogleAuthProvider.credentialFromError(error);
       });
   };
 
+  // Field borders and button loaders reflect the current auth request state.
   return (
     <section
       className="min-h-screen bg-gray-50 bg-cover bg-center pt-20 dark:bg-gray-900"
@@ -153,7 +153,7 @@ function SignIn() {
                           ? "bg-stone-700 text-white sm:text-sm rounded-sm focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 border-2 border-red-700  dark:placeholder-white dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 placeholder:text-white"
                           : "bg-stone-700 text-white sm:text-sm rounded-sm focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:placeholder-white dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 placeholder:text-white"
                       }
-                      placeholder="name@email.com"
+                      placeholder="Email Address"
                       required=""
                       onChange={(e) => setEmail(e.target.value)}
                     ></input>

@@ -1,4 +1,4 @@
-/** @type {import('tailwindcss').Config} */
+// Tailwind scans the Vite entry file and React source tree for utility classes.
 module.exports = {
   content: ["./index.html", "./src/**/*.{js,jsx}"],
   theme: {

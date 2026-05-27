@@ -3,6 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import axios from "../axios";
 import { API_KEY } from "../constants/constants";
 
+// Play page resolves the selected title to an embeddable YouTube trailer.
 function Play() {
   const { id } = useParams();
   const [videoKey, setVideoKey] = useState("");
@@ -10,6 +11,7 @@ function Play() {
   useEffect(() => {
     if (!id) return;
 
+    // Prefer an official trailer but fall back to the first available video.
     axios
       .get(`/movie/${id}/videos?api_key=${API_KEY}&language=en-US`)
       .then((response) => {
@@ -21,6 +23,7 @@ function Play() {
       .catch(() => setVideoKey(""));
   }, [id]);
 
+  // Show a graceful unavailable state when TMDb has no playable video.
   return (
     <main className="min-h-screen bg-black pt-20 text-white">
       <div className="mx-auto w-full max-w-6xl px-4">

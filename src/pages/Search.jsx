@@ -10,6 +10,7 @@ import useUpdateLikedMovies from "../hooks/useUpdateLikedMovies";
 import useGenereConverter from "../hooks/useGenreConverter";
 import StarRatings from "react-star-ratings";
 
+// Search page queries TMDb and renders interactive result cards.
 function Search() {
   const { showModal, setShowModal } = useContext(PopUpContext);
   const { addToMyList, PopupMessage } = useUpdateMylist();
@@ -21,11 +22,13 @@ function Search() {
   const [movies, setMovies] = useState([]);
   const [moviePopupInfo, setMoviePopupInfo] = useState({});
 
+  // Keep the search results synchronized with the latest user-entered query.
   const Search = (e) => {
     setSearchQuery(e.target.value);
     e.preventDefault();
     console.log(searchQuery);
 
+    // Query TMDb directly through the shared axios client.
     axios
       .get(
         `/search/movie?api_key=${API_KEY}&language=en-US&query=${searchQuery}&page=1&include_adult=false`
@@ -35,11 +38,13 @@ function Search() {
         setMovies(response.data.results);
       });
 
+    // Clear stale results when the search box is emptied.
     if (searchQuery === "") {
       setMovies([]);
     }
   };
 
+  // Store selected movie details before opening the shared popup modal.
   const handleMoviePopup = (movieInfo) => {
     setMoviePopupInfo(movieInfo);
     setShowModal(true);
@@ -79,7 +84,6 @@ function Search() {
         </button>
       </div>
 
-      {/* Search results */}
       <div className="grid-cols-2 grid p-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 3xl:grid-cols-5 md:p-5 space-y-1 lg:space-y-0 lg:grid lg:gap-3 lg:grid-rows-3">
         {movies.length !== 0 ? (
           movies.map((movie) => {
@@ -109,7 +113,6 @@ function Search() {
                     className="hidden xl:block absolute -bottom-52 group-hover:bottom-0 w-full transition-all duration-500 p-4 rounded"
                   >
                     <div className="flex mb-1 transition ease-in-out delay-150">
-                      {/* Play Button */}
                       <div
                         onClick={() => playMovie(movie)}
                         className="text-white w-10 h-10 2xl:w-14 2xl:h-14 border-[2px] 2xl:border-[3px] rounded-full p-2 mr-2 backdrop-blur-[1px] shadow-md ease-linear transition-all duration-150 hover:border-red-600 hover:text-red-600"
@@ -129,7 +132,6 @@ function Search() {
                         </svg>
                       </div>
 
-                      {/* Like Button */}
                       <div
                         onClick={() => addToLikedMovies(movie)}
                         className="text-white w-10 h-10 2xl:w-14 2xl:h-14 border-[2px] 2xl:border-[3px] rounded-full p-2 mr-2 backdrop-blur-[1px] shadow-md ease-linear transition-all duration-150 hover:border-red-600 hover:text-red-600"
@@ -149,7 +151,6 @@ function Search() {
                         </svg>
                       </div>
 
-                      {/* Add to MyList Button */}
                       <div
                         onClick={() => addToMyList(movie)}
                         className="text-white w-10 h-10 2xl:w-14 2xl:h-14 border-[2px] 2xl:border-[3px] rounded-full p-2 mr-2 backdrop-blur-[1px] shadow-md ease-linear transition-all duration-150 hover:border-red-600 hover:text-red-600"
@@ -169,7 +170,6 @@ function Search() {
                         </svg>
                       </div>
 
-                      {/* PopUp Button */}
                       <div
                         onClick={() => handleMoviePopup(movie)}
                         className="text-white w-10 h-10 2xl:w-14 2xl:h-14 border-[2px] 2xl:border-[3px] rounded-full p-2 mr-2 backdrop-blur-[1px] shadow-md ease-linear transition-all duration-150 hover:border-red-600 hover:text-red-600"

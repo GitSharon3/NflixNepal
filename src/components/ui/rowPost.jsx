@@ -8,6 +8,7 @@ import useUpdateLikedMovies from "../../hooks/useUpdateLikedMovies";
 import useUpdateMylist from "../../hooks/useUpdateList";
 import MoviePopUp from "./moviePopUp";
 
+// RowPost renders a horizontal movie shelf from either fetched or provided data.
 function RowPost({ title, url, movieData, islarge = false, first = false }) {
   const { showModal, setShowModal } = useContext(PopUpContext);
   const { playMovie } = usePlayMovie();
@@ -17,27 +18,32 @@ function RowPost({ title, url, movieData, islarge = false, first = false }) {
   const [moviePopupInfo, setMoviePopupInfo] = useState({});
 
   useEffect(() => {
+    // Prefer caller-provided movies for personalized rows.
     if (movieData) {
       setMovies(movieData);
       return;
     }
 
     if (!url) return;
+    // Fetch TMDb category rows through the configured axios client.
     axios.get(url).then((response) => {
       setMovies(response.data.results || []);
     });
   }, [movieData, url]);
 
+  // Share selected movie details with the global modal.
   const handleMoviePopup = (movie) => {
     setMoviePopupInfo(movie);
     setShowModal(true);
   };
 
+  // The first row overlaps the banner to match the Netflix-style layout.
   return (
     <section className={`${first ? "-mt-44 relative z-10" : "mt-8"} px-2`}>
       <h2 className="mb-3 text-xl font-semibold text-white md:text-2xl">{title}</h2>
       <div className="flex gap-3 overflow-x-auto pb-5">
         {movies.map((movie) => {
+          // Large rows use posters; standard rows prefer landscape imagery.
           const imagePath = islarge ? movie.poster_path : movie.backdrop_path || movie.poster_path;
           if (!imagePath) return null;
 

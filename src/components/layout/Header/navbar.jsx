@@ -1,8 +1,10 @@
+// Main navigation header for authenticated users.
 import { useContext } from "react";
 import { NavLink, Link } from "react-router-dom";
 import { AuthContext } from "../../../context/userContext";
 import logo from "../../../assets/images/logoo.png";
 
+// Static route map used to render the primary navigation menu.
 const links = [
   { to: "/home", label: "Home" },
   { to: "/series", label: "Series" },
@@ -13,15 +15,14 @@ const links = [
 ];
 
 function Navbar() {
+  // Read the active user session for display name and avatar rendering.
   const { User } = useContext(AuthContext);
 
   return (
     <header className="fixed top-0 z-40 flex w-full items-center justify-between bg-gradient-to-b from-black/90 to-black/20 px-4 py-4 backdrop-blur-sm md:px-8">
       
-      {/* Left Side */}
       <div className="flex min-w-0 items-center gap-6">
         
-        {/* Logo */}
         <Link to="/home" className="shrink-0">
           <img
             className="h-10 w-auto md:h-14"
@@ -30,7 +31,6 @@ function Navbar() {
           />
         </Link>
 
-        {/* Navigation Links */}
         <nav className="hidden items-center gap-8 md:flex">
           {links.map((link) => (
             <NavLink
@@ -50,7 +50,6 @@ function Navbar() {
         </nav>
       </div>
 
-      {/* Right Side */}
       <Link to="/profile" className="flex shrink-0 items-center gap-3">
         <span className="hidden max-w-40 truncate text-base text-white sm:block">
           {User?.displayName || User?.email || "Profile"}

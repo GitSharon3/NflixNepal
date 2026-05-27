@@ -1,6 +1,8 @@
+// Main application component containing routing, lazy-loaded pages, and global authentication state listener
 import { useEffect, useContext, lazy, Suspense } from "react";
 import "./App.css";
 
+// Lazy-loaded page components for optimized bundle size and faster initial load
 const Home = lazy(() => import("./pages/Home"));
 const Series = lazy(() => import("./pages/Series"));
 const Search = lazy(() => import("./pages/Search"));
@@ -23,14 +25,19 @@ import NavbarWithoutUser from "./components/layout/Header/navbarWithoutUser";
 
 function App() {
   const { User, setUser } = useContext(AuthContext);
+
+  // Synchronize global authentication state with Firebase Auth.
   useEffect(() => {
     const auth = getAuth();
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setUser(user);
     });
+
+    // Clean up the Firebase listener when the app unmounts.
     return unsubscribe;
   }, [setUser]);
 
+  // Route access is derived from the current auth session.
   return (
     <div>
       {User ? <Navbar /> : <NavbarWithoutUser />}

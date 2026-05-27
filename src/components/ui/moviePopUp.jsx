@@ -9,6 +9,7 @@ import useGenereConverter from "../../hooks/useGenreConverter";
 import useUpdateLikedMovies from "../../hooks/useUpdateLikedMovies";
 import useUpdateWatchedMovies from "../../hooks/useUpdateWatchedMovies";
 
+// MoviePopUp centralizes movie details and collection actions in a modal.
 function MoviePopUp(props) {
   const { showModal, setShowModal } = useContext(PopUpContext);
   const { addToMyList, removeFromMyList, PopupMessage } = useUpdateMylist();
@@ -21,9 +22,11 @@ function MoviePopUp(props) {
   const [PopupInfo, setPopupInfo] = useState({});
 
   useEffect(() => {
+    // Copy the selected movie into local state for modal rendering.
     setPopupInfo(props.data1);
   }, []);
 
+  // Action buttons adapt to the collection that opened the popup.
   return (
     <>
       {PopupMessage}
@@ -31,10 +34,8 @@ function MoviePopUp(props) {
         <>
           <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
             <div className="relative w-auto mt-24 sm:my-6 mx-4 max-w-3xl">
-              {/*content*/}
               <Fade bottom duration={500}>
                 <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-neutral-800 outline-none focus:outline-none">
-                  {/*header*/}
                   <button
                     className="group p-1 ml-2 mt-2 backdrop-blur-[20px] bg-transparent border-2 border-white hover:bg-white hover:text-black fixed right-4 rounded-full cursor-pointer float-right font-semibold outline-none focus:outline-none ease-linear transition-all duration-150"
                     onClick={() => setShowModal(false)}
@@ -54,7 +55,6 @@ function MoviePopUp(props) {
                       />
                     </svg>
                   </button>
-                  {/*Movie Trailer or Image*/}
                   {PopupInfo.backdrop_path ? (
                     <img src={`${imageUrl + PopupInfo.backdrop_path}`} />
                   ) : null}
@@ -133,7 +133,6 @@ function MoviePopUp(props) {
                       </h1>
                     </div>
                   </Fade>
-                  {/*body*/}
                   <Fade bottom>
                     <div className="relative p-4 sm:p-6 flex-auto">
                       <div className="bg-neutral-700 h-[0.125rem]"></div>
@@ -143,9 +142,7 @@ function MoviePopUp(props) {
                       <div className="bg-neutral-700 h-[0.125rem]"></div>
                     </div>
                   </Fade>
-                  {/*footer*/}
                   <div className="sm:flex items-center justify-end p-2 rounded-b">
-                    {/*More Info*/}
                     <Fade bottom>
                       <div className="relative p-2 py-5 sm:p-6 flex-auto">
                         <h1 className="flex -mt-4 text-neutral-400 text-sm leading-relaxed">

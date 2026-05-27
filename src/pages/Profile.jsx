@@ -12,6 +12,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 
+// Profile page lets authenticated users update display details and sign out.
 function Profile() {
   const { User } = useContext(AuthContext);
 
@@ -26,6 +27,7 @@ function Profile() {
 
   useEffect(() => {
     if (User != null) {
+      // Initialize the local avatar preview from the active Firebase user.
       console.log(User.photoURL, "hello");
       setProfilePic(User.photoURL);
     }
@@ -33,6 +35,7 @@ function Profile() {
 
   const inputRef = useRef(null);
 
+  // Opens the hidden file input when custom upload support is enabled.
   const handleClick = () => {
     inputRef.current.click();
   };
@@ -43,6 +46,7 @@ function Profile() {
 
 
 
+  // Persist a changed display name only after the user has entered a value.
   const changeUserName = (e) => {
     e.preventDefault();
     if (isUserNameChanged) {
@@ -62,6 +66,7 @@ function Profile() {
 
   };
 
+  // Update Firebase Auth with a selected avatar URL.
   const updateProfilePic = (imageURL) => {
     const auth = getAuth();
     updateProfile(auth.currentUser, { photoURL: imageURL })
@@ -74,6 +79,7 @@ function Profile() {
       });
   };
 
+  // Sign out through Firebase Auth and return to the public landing route.
   const SignOut = () => {
     const auth = getAuth();
     signOut(auth)
@@ -85,6 +91,7 @@ function Profile() {
       });
   };
 
+  // The primary action switches between saving profile changes and returning home.
   return (
     <div>
       <div

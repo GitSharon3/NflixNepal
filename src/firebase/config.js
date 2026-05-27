@@ -1,3 +1,4 @@
+// Firebase SDK initialization and Firestore service configuration.
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 import {
@@ -10,6 +11,7 @@ import {
   FIREBASE_MEASUREMENT_ID,
 } from "../constants/constants";
 
+// Firebase config is sourced from Vite environment constants.
 const firebaseConfig = {
   apiKey: FIREBASE_API_KEY,
   authDomain: FIREBASE_AUTH_DOMAIN,
@@ -20,5 +22,8 @@ const firebaseConfig = {
   measurementId: FIREBASE_MEASUREMENT_ID
 };
 
+// Initialize the base Firebase application instance once.
 export const FirebaseApp = initializeApp(firebaseConfig);
+
+// Export the shared Cloud Firestore service reference.
 export const db = getFirestore(FirebaseApp);

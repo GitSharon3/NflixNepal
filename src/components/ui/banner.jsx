@@ -7,6 +7,7 @@ import StarRatings from "react-star-ratings";
 import MoviePopUp from "./moviePopUp";
 import usePlayMovie from "../../hooks/usePlay";
 
+// Banner displays a random featured title from the supplied TMDb category URL.
 function Banner(props) {
   const { showModal, setShowModal } = useContext(PopUpContext);
   const { playMovie } = usePlayMovie();
@@ -15,6 +16,7 @@ function Banner(props) {
   const [moviePopupInfo, setMoviePopupInfo] = useState({});
   const [urlId, setUrlId] = useState("");
 
+  // Track viewport width for responsive banner behavior.
   function getWindowSize() {
     const {innerWidth:width } = window;
     return {
@@ -26,6 +28,7 @@ function Banner(props) {
 
 
   useEffect(() => {
+    // Fetch a category, shuffle client-side, and feature one title.
     axios.get(props.url).then((response) => {
       setMovie(
         response.data.results.sort(function (a, b) {
@@ -35,6 +38,7 @@ function Banner(props) {
       console.log(movie);
     });
 
+    // Keep local viewport state in sync with browser resizes.
     function handleWindowResize() {
       setWindowSeize(getWindowSize())
     }
@@ -43,6 +47,7 @@ function Banner(props) {
 
   }, []);
 
+  // Open the modal and fetch the first related video for richer details.
   const handleMoviePopup = (movieInfo) => {
     setMoviePopupInfo(movieInfo);
     setShowModal(true);
@@ -59,6 +64,7 @@ function Banner(props) {
       });
   };
 
+  // Skeleton UI is shown until the featured movie payload has loaded.
   return (
     <>
       <div

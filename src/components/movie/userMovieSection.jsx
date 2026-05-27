@@ -16,6 +16,7 @@ import axios from "../../axios";
 import StarRatings from "react-star-ratings";
 import { ClipLoader } from "react-spinners";
 
+// Reusable collection page for My List, watched movies, and liked movies.
 function UserMovieSection(props) {
   const { User } = useContext(AuthContext);
   const { showModal, setShowModal } = useContext(PopUpContext);
@@ -35,6 +36,7 @@ function UserMovieSection(props) {
 
   const navigate = useNavigate();
 
+  // Load the requested user collection from Firestore and track empty results.
   function getMovies() {
     getDoc(doc(db, props.from, User.uid)).then((result) => {
       const mv = result.data();
@@ -46,6 +48,7 @@ function UserMovieSection(props) {
   }
 
   useEffect(() => {
+    // Derive the page title from the Firestore collection being displayed.
     getMovies();
     if (props.from === "MyList") {
       setTitle("Movies in My List");
@@ -56,6 +59,7 @@ function UserMovieSection(props) {
     }
   }, []);
 
+  // Route remove actions to the collection-specific hook.
   const removeMovie = (movie) => {
     if (props.from === "MyList") {
       removeFromMyList(movie);
@@ -67,11 +71,13 @@ function UserMovieSection(props) {
     getMovies();
   };
 
+  // Cache selected movie details before opening the shared details modal.
   const handleMoviePopup = (movieInfo) => {
     setMoviePopupInfo(movieInfo);
     setShowModal(true);
   };
 
+  // Reverse the list so newly added titles appear first.
   return (
     <div>
       {PopupMessage}
@@ -113,7 +119,6 @@ function UserMovieSection(props) {
                       className="hidden xl:block absolute -bottom-52 group-hover:bottom-0 w-full transition-all duration-500 p-4 rounded"
                     >
                       <div className="flex mb-1 transition ease-in-out delay-150">
-                        {/* Play Button */}
                         <div
                           onClick={() => playMovie(movie, props.from)}
                           className="text-white w-10 h-10 2xl:w-14 2xl:h-14 border-[2px] 2xl:border-[3px] rounded-full p-2 mr-2 backdrop-blur-[1px] shadow-md ease-linear transition-all duration-150 hover:border-red-600 hover:text-red-600"
@@ -133,7 +138,6 @@ function UserMovieSection(props) {
                           </svg>
                         </div>
 
-                        {/* Like or Dislike Button */}
                         {props.from === "LikedMovies" ? (
                           <>
                             <div
@@ -178,7 +182,6 @@ function UserMovieSection(props) {
                           </>
                         )}
 
-                        {/* Add to MyList or remove from MyList Button */}
                         {props.from === "MyList" ||
                         props.from === "WatchedMovies" ? (
                           <>
@@ -224,7 +227,6 @@ function UserMovieSection(props) {
                           </>
                         )}
 
-                        {/* PopUp Button */}
                         <div
                           onClick={() => handleMoviePopup(movie)}
                           className="text-white w-10 h-10 2xl:w-14 2xl:h-14 border-[2px] 2xl:border-[3px] rounded-full p-2 mr-2 backdrop-blur-[1px] shadow-md ease-linear transition-all duration-150 hover:border-red-600 hover:text-red-600"

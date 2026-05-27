@@ -1,3 +1,4 @@
+// Full-page loading state used while lazy routes are fetched.
 function Loading() {
   return (
     <div className="min-h-screen bg-neutral-950 flex items-center justify-center">

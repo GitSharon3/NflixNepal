@@ -1,8 +1,11 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
+// Error page handles unknown routes and provides a direct path back home.
 function ErrorPage() {
   const navigate = useNavigate();
+
+  // Route users back through the app's authenticated or public root decision.
   return (
     <div className="h-screen flex items-center justify-center">
       <div className="flex flex-col items-center">

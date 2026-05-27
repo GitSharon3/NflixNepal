@@ -1,11 +1,13 @@
+// Footer component renders platform links, language choice, and security copy.
 import React from "react";
 import styles from "./styles.module.scss";
 
 function Footer2() {
+  // Static footer content is shared across public and authenticated pages.
   return (
     <div className="bg-black p-2">
       <footer className={styles.footer}>
-        <div className={styles.containerFooter}>
+          <div className={styles.containerFooter}>
           <div className={styles.icons}></div>
           <ul className={styles.details}>
             <li>FAQ</li>
@@ -27,7 +29,7 @@ function Footer2() {
           <div className={styles.security}>
             <div> Nepali</div>
           </div>
-            <span>© This page is protected by Google reCAPTCHA to ensure you&apos;re not a bot.</span>
+          <span>© This page is protected by Google reCAPTCHA to ensure you&apos;re not a bot.</span>
           
         </div>
       </footer>

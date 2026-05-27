@@ -1,7 +1,9 @@
+// Top navigation bar for unauthenticated guests.
 import { Link } from "react-router-dom";
 import logo from "../../../assets/images/logoo.png";
 
 function NavbarWithoutUser() {
+  // Keep guest navigation minimal with only brand and sign-in access.
   return (
     <header className="fixed top-0 z-40 flex w-full items-center justify-between bg-gradient-to-b from-black/90 to-transparent px-4 py-3 md:px-10">
       <Link to="/" className="flex items-center gap-3">

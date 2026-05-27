@@ -9,10 +9,11 @@ import WelcomePageBanner from "../assets/images/WelcomePageBanner.jpg";
 import { Fade } from "../components/ui/Fade";
 import { Link } from "react-router-dom";
 
+// Welcome page presents the unauthenticated landing experience.
 function Welcome() {
+  // Marketing sections are wrapped with Fade to preserve the page animation API.
   return (
     <div className="bg-black text-white">
-      {/*Hero Section*/}
       <div
         style={{
           backgroundImage: `linear-gradient(0deg, hsl(0deg 0% 0% / 76%) 0%, hsl(0deg 0% 0% / 76%) 35%), url(${WelcomePageBanner})`,
@@ -53,7 +54,6 @@ function Welcome() {
         ></div>
       </div>
 
-      {/* Section 2 */}
       <section className="border-y-8 border-y-zinc-800 bg-black">
         <Fade>
           <div className="flex justify-center md:py-8">
@@ -75,7 +75,6 @@ function Welcome() {
         </Fade>
       </section>
 
-      {/* Section 3 */}
       <section className="bg-black">
         <Fade>
           <div className="flex justify-center">
@@ -97,7 +96,6 @@ function Welcome() {
         </Fade>
       </section>
 
-      {/* Section 4 */}
       <section className="bg-black border-y-8 border-y-zinc-800">
         <Fade>
           <div className="flex justify-center md:py-8">
@@ -119,7 +117,6 @@ function Welcome() {
         </Fade>
       </section>
 
-      {/* Section 5 */}
       <section className="bg-black">
         <Fade>
           <div className="flex justify-center">
@@ -141,10 +138,8 @@ function Welcome() {
         </Fade>
       </section>
 
-      {/* Section 6 */}
       <section></section>
 
-      {/* Footer */}
       <Footer></Footer>
     </div>
   );
